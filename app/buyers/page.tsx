@@ -213,7 +213,7 @@ export default async function BuyersPage({
           <Pagination
             currentPage={page}
             totalPages={totalPages}
-            searchParams={resolvedSearchParams}
+            searchParams={resolvedSearchParams as Record<string, string | undefined>}
           />
         )}
       </div>
