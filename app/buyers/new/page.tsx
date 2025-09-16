@@ -20,7 +20,7 @@ export default function NewBuyerPage() {
     formState: { errors },
     setValue,
   } = useForm<BuyerFormData>({
-    resolver: zodResolver(buyerFormSchema),
+    resolver: zodResolver(buyerFormSchema) as any,
     defaultValues: {
       status: "NEW",
       tags: [],
