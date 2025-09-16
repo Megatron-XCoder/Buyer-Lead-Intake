@@ -13,9 +13,9 @@ const baseBuyerFormSchema = z.object({
   budgetMax: z.number().int().positive().optional().or(z.nan()),
   timeline: z.nativeEnum(Timeline),
   source: z.nativeEnum(Source),
-  status: z.nativeEnum(Status).default('NEW'),
+  status: z.nativeEnum(Status).optional(),
   notes: z.string().max(1000, 'Notes must be less than 1000 characters').optional(),
-  tags: z.array(z.string()).optional().default([])
+  tags: z.array(z.string()).optional()
 });
 
 const baseBuyerSchema = z.object({
@@ -53,7 +53,14 @@ export const buyerFormSchema = baseBuyerFormSchema.refine((data) => {
 }, {
   message: 'Maximum budget must be greater than or equal to minimum budget',
   path: ['budgetMax']
-});
+}).transform((data) => ({
+  ...data,
+  email: data.email === '' ? undefined : data.email,
+  budgetMin: isNaN(data.budgetMin as number) ? undefined : data.budgetMin,
+  budgetMax: isNaN(data.budgetMax as number) ? undefined : data.budgetMax,
+  status: data.status || 'NEW',
+  tags: data.tags || [],
+}));
 
 export const buyerSchema = baseBuyerSchema.refine((data) => {
   // BHK is required if propertyType is Apartment or Villa
