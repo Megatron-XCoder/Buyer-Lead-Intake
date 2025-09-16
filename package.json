@@ -1,7 +1,7 @@
 {
   "name": "buyer-lead-intake",
   "version": "1.0.0",
-  "description": "",
+  "description": "Buyer Lead Intake System - Production Ready",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
