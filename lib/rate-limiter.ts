@@ -1,25 +1,43 @@
-import { RateLimiterMemory } from "rate-limiter-flexible";
+// Simple in-memory rate limiter
+class SimpleRateLimiter {
+  private requests: Map<string, number[]> = new Map();
+  private maxRequests: number;
+  private windowMs: number;
 
-// Rate limiter for buyer creation and updates
-export const buyerRateLimiter = new RateLimiterMemory({
-  points: 10, // Number of requests
-  duration: 60, // Per 60 seconds
-});
+  constructor(maxRequests: number, windowMs: number) {
+    this.maxRequests = maxRequests;
+    this.windowMs = windowMs;
+  }
 
-// Rate limiter for CSV imports
-export const importRateLimiter = new RateLimiterMemory({
-  points: 3, // Number of requests
-  duration: 300, // Per 5 minutes
-});
+  async consume(key: string): Promise<boolean> {
+    const now = Date.now();
+    const userRequests = this.requests.get(key) || [];
+    
+    // Remove old requests outside the window
+    const validRequests = userRequests.filter(time => now - time < this.windowMs);
+    
+    if (validRequests.length >= this.maxRequests) {
+      // Rate limit exceeded
+      this.requests.set(key, validRequests);
+      return false;
+    }
+    
+    // Add new request
+    validRequests.push(now);
+    this.requests.set(key, validRequests);
+    return true;
+  }
+}
+
+// Rate limiter for buyer creation and updates (10 requests per 60 seconds)
+export const buyerRateLimiter = new SimpleRateLimiter(10, 60 * 1000);
+
+// Rate limiter for CSV imports (3 requests per 5 minutes)
+export const importRateLimiter = new SimpleRateLimiter(3, 5 * 60 * 1000);
 
 export async function checkRateLimit(
-  limiter: RateLimiterMemory,
+  limiter: SimpleRateLimiter,
   key: string
 ): Promise<boolean> {
-  try {
-    await limiter.consume(key);
-    return true;
-  } catch (rejRes: any) {
-    return false;
-  }
+  return await limiter.consume(key);
 }
