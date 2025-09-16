@@ -13,7 +13,7 @@ const baseBuyerFormSchema = z.object({
   budgetMax: z.number().int().positive().optional().or(z.nan()),
   timeline: z.nativeEnum(Timeline),
   source: z.nativeEnum(Source),
-  status: z.nativeEnum(Status).optional().default('NEW'),
+  status: z.nativeEnum(Status).default('NEW'),
   notes: z.string().max(1000, 'Notes must be less than 1000 characters').optional(),
   tags: z.array(z.string()).optional().default([])
 });
