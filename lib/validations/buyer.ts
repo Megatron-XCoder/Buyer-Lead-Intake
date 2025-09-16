@@ -109,7 +109,23 @@ export const buyerSchema = baseBuyerSchema.refine((data) => {
   budgetMax: isNaN(data.budgetMax as number) ? undefined : data.budgetMax,
 }));
 
-export type BuyerFormData = z.infer<typeof buyerFormSchema>;
+// Explicit type definition for forms to avoid inference conflicts
+export type BuyerFormData = {
+  fullName: string;
+  email?: string;
+  phone: string;
+  city: City;
+  propertyType: PropertyType;
+  bhk?: BHK;
+  purpose: Purpose;
+  budgetMin?: number;
+  budgetMax?: number;
+  timeline: Timeline;
+  source: Source;
+  status?: Status;
+  notes?: string;
+  tags?: string[];
+};
 
 export const buyerUpdateSchema = baseBuyerSchema.extend({
   updatedAt: z.string().datetime()
