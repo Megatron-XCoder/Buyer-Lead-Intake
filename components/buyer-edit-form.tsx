@@ -25,7 +25,7 @@ export default function BuyerEditForm({ buyer, canEdit }: BuyerEditFormProps) {
     formState: { errors },
     setValue,
     reset,
-  } = useForm<BuyerFormData>({
+  } = useForm<any>({
     resolver: zodResolver(buyerFormSchema) as any,
     defaultValues: {
       fullName: buyer.fullName,
