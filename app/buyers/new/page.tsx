@@ -79,7 +79,7 @@ export default function NewBuyerPage() {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
               {errors.fullName && (
-                <p className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>
+                <p className="mt-1 text-sm text-red-600">{String(errors.fullName.message || 'Invalid input')}</p>
               )}
             </div>
 
@@ -93,7 +93,7 @@ export default function NewBuyerPage() {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
               {errors.phone && (
-                <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+                <p className="mt-1 text-sm text-red-600">{String(errors.phone.message || 'Invalid input')}</p>
               )}
             </div>
 
@@ -107,7 +107,7 @@ export default function NewBuyerPage() {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                <p className="mt-1 text-sm text-red-600">{String(errors.email.message || 'Invalid input')}</p>
               )}
             </div>
 
@@ -127,7 +127,7 @@ export default function NewBuyerPage() {
                 ))}
               </select>
               {errors.city && (
-                <p className="mt-1 text-sm text-red-600">{errors.city.message}</p>
+                <p className="mt-1 text-sm text-red-600">{String(errors.city.message || 'Invalid input')}</p>
               )}
             </div>
 
@@ -147,7 +147,7 @@ export default function NewBuyerPage() {
                 ))}
               </select>
               {errors.propertyType && (
-                <p className="mt-1 text-sm text-red-600">{errors.propertyType.message}</p>
+                <p className="mt-1 text-sm text-red-600">{String(errors.propertyType.message || 'Invalid input')}</p>
               )}
             </div>
 
@@ -168,7 +168,7 @@ export default function NewBuyerPage() {
                   ))}
                 </select>
                 {errors.bhk && (
-                  <p className="mt-1 text-sm text-red-600">{errors.bhk.message}</p>
+                  <p className="mt-1 text-sm text-red-600">{String(errors.bhk.message || 'Invalid input')}</p>
                 )}
               </div>
             )}
@@ -189,7 +189,7 @@ export default function NewBuyerPage() {
                 ))}
               </select>
               {errors.purpose && (
-                <p className="mt-1 text-sm text-red-600">{errors.purpose.message}</p>
+                <p className="mt-1 text-sm text-red-600">{String(errors.purpose.message || 'Invalid input')}</p>
               )}
             </div>
 
@@ -203,7 +203,7 @@ export default function NewBuyerPage() {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
               {errors.budgetMin && (
-                <p className="mt-1 text-sm text-red-600">{errors.budgetMin.message}</p>
+                <p className="mt-1 text-sm text-red-600">{String(errors.budgetMin.message || 'Invalid input')}</p>
               )}
             </div>
 
@@ -217,7 +217,7 @@ export default function NewBuyerPage() {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
               {errors.budgetMax && (
-                <p className="mt-1 text-sm text-red-600">{errors.budgetMax.message}</p>
+                <p className="mt-1 text-sm text-red-600">{String(errors.budgetMax.message || 'Invalid input')}</p>
               )}
             </div>
 
@@ -237,7 +237,7 @@ export default function NewBuyerPage() {
                 ))}
               </select>
               {errors.timeline && (
-                <p className="mt-1 text-sm text-red-600">{errors.timeline.message}</p>
+                <p className="mt-1 text-sm text-red-600">{String(errors.timeline.message || 'Invalid input')}</p>
               )}
             </div>
 
@@ -257,7 +257,7 @@ export default function NewBuyerPage() {
                 ))}
               </select>
               {errors.source && (
-                <p className="mt-1 text-sm text-red-600">{errors.source.message}</p>
+                <p className="mt-1 text-sm text-red-600">{String(errors.source.message || 'Invalid input')}</p>
               )}
             </div>
           </div>
@@ -272,7 +272,7 @@ export default function NewBuyerPage() {
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
             {errors.notes && (
-              <p className="mt-1 text-sm text-red-600">{errors.notes.message}</p>
+              <p className="mt-1 text-sm text-red-600">{String(errors.notes.message || 'Invalid input')}</p>
             )}
           </div>
 

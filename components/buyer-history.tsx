@@ -1,4 +1,4 @@
-import { BuyerHistory, User } from "@prisma/client";
+import type { BuyerHistory, User } from "@prisma/client";
 import { Clock } from "lucide-react";
 
 interface BuyerHistoryProps {

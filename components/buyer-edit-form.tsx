@@ -210,7 +210,7 @@ export default function BuyerEditForm({ buyer, canEdit }: BuyerEditFormProps) {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
           {errors.fullName && (
-            <p className="mt-1 text-sm text-red-600">{errors.fullName.message}</p>
+            <p className="mt-1 text-sm text-red-600">{String(errors.fullName.message || 'Invalid input')}</p>
           )}
         </div>
 
@@ -224,7 +224,7 @@ export default function BuyerEditForm({ buyer, canEdit }: BuyerEditFormProps) {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
           {errors.phone && (
-            <p className="mt-1 text-sm text-red-600">{errors.phone.message}</p>
+            <p className="mt-1 text-sm text-red-600">{String(errors.phone.message || 'Invalid input')}</p>
           )}
         </div>
 
@@ -238,7 +238,7 @@ export default function BuyerEditForm({ buyer, canEdit }: BuyerEditFormProps) {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
           {errors.email && (
-            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+            <p className="mt-1 text-sm text-red-600">{String(errors.email.message || 'Invalid input')}</p>
           )}
         </div>
 
@@ -291,7 +291,7 @@ export default function BuyerEditForm({ buyer, canEdit }: BuyerEditFormProps) {
               ))}
             </select>
             {errors.bhk && (
-              <p className="mt-1 text-sm text-red-600">{errors.bhk.message}</p>
+              <p className="mt-1 text-sm text-red-600">{String(errors.bhk.message || 'Invalid input')}</p>
             )}
           </div>
         )}
@@ -333,7 +333,7 @@ export default function BuyerEditForm({ buyer, canEdit }: BuyerEditFormProps) {
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
           {errors.budgetMax && (
-            <p className="mt-1 text-sm text-red-600">{errors.budgetMax.message}</p>
+            <p className="mt-1 text-sm text-red-600">{String(errors.budgetMax.message || 'Invalid input')}</p>
           )}
         </div>
 
@@ -396,7 +396,7 @@ export default function BuyerEditForm({ buyer, canEdit }: BuyerEditFormProps) {
           className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
         {errors.notes && (
-          <p className="mt-1 text-sm text-red-600">{errors.notes.message}</p>
+          <p className="mt-1 text-sm text-red-600">{String(errors.notes.message || 'Invalid input')}</p>
         )}
       </div>
 
