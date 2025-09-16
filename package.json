@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && prisma db push && next build",
+    "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
-    "vercel-build": "prisma migrate deploy && next build",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch",
     "postinstall": "prisma generate",
+    "vercel-build": "prisma migrate deploy && next build",
     "db:migrate": "prisma migrate deploy"
   },
   "keywords": [],
