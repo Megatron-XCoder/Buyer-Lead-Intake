@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
-import { buyerFormSchema } from "@/lib/validations/buyer";
+import { buyerApiSchema } from "@/lib/validations/buyer";
 import { importRateLimiter, checkRateLimit } from "@/lib/rate-limiter";
 import { parse } from "csv-parse/sync";
 import { z } from "zod";
@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
         }
 
         // Validate with Zod schema
-        const validatedData = buyerFormSchema.parse(processedRecord);
+        const validatedData = buyerApiSchema.parse(processedRecord);
         validData.push({
           ...validatedData,
           tags: validatedData.tags?.join(",") || "",

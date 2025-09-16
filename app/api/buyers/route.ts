@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/db";
-import { buyerFormSchema } from "@/lib/validations/buyer";
+import { buyerApiSchema } from "@/lib/validations/buyer";
 import { buyerRateLimiter, checkRateLimit } from "@/lib/rate-limiter";
 import { z } from "zod";
 
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const validatedData = buyerFormSchema.parse(body);
+    const validatedData = buyerApiSchema.parse(body);
 
     // Convert tags array to string
     const tagsString = validatedData.tags?.join(",") || "";

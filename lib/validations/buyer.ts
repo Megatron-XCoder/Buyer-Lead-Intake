@@ -35,7 +35,29 @@ const baseBuyerSchema = z.object({
   tags: z.array(z.string()).optional().default([])
 });
 
+// Form validation schema (without transform to avoid type conflicts)
 export const buyerFormSchema = baseBuyerFormSchema.refine((data) => {
+  // BHK is required if propertyType is Apartment or Villa
+  if ((data.propertyType === 'APARTMENT' || data.propertyType === 'VILLA') && !data.bhk) {
+    return false;
+  }
+  return true;
+}, {
+  message: 'BHK is required for Apartment and Villa property types',
+  path: ['bhk']
+}).refine((data) => {
+  // If both budgetMin and budgetMax are provided, max must be >= min
+  if (data.budgetMin && data.budgetMax && !isNaN(data.budgetMin) && !isNaN(data.budgetMax)) {
+    return data.budgetMax >= data.budgetMin;
+  }
+  return true;
+}, {
+  message: 'Maximum budget must be greater than or equal to minimum budget',
+  path: ['budgetMax']
+});
+
+// API processing schema (with transform for data processing)
+export const buyerApiSchema = baseBuyerFormSchema.refine((data) => {
   // BHK is required if propertyType is Apartment or Villa
   if ((data.propertyType === 'APARTMENT' || data.propertyType === 'VILLA') && !data.bhk) {
     return false;
