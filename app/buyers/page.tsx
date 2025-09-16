@@ -15,6 +15,7 @@ interface SearchParams {
   propertyType?: string;
   status?: string;
   timeline?: string;
+  [key: string]: string | undefined;
 }
 
 interface Props {
