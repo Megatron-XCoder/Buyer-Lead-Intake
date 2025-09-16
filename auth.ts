@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { prisma } from "@/lib/db";
+// Removed Prisma import for Edge compatibility
 import type { NextAuthConfig } from "next-auth";
 
 export const config = {
@@ -9,35 +9,12 @@ export const config = {
       name: "Demo Login",
       credentials: {},
       async authorize() {
-        try {
-          // Create or get demo user
-          let user = await prisma.user.findFirst({
-            where: { email: "demo@example.com" }
-          });
-          
-          if (!user) {
-            user = await prisma.user.create({
-              data: {
-                email: "demo@example.com",
-                name: "Demo User"
-              }
-            });
-          }
-          
-          return {
-            id: user.id,
-            email: user.email,
-            name: user.name
-          };
-        } catch (error) {
-          console.error("Auth error:", error);
-          // Return a default user for demo purposes
-          return {
-            id: "demo-user-id",
-            email: "demo@example.com",
-            name: "Demo User"
-          };
-        }
+        // Use a static demo user for Edge compatibility
+        return {
+          id: "demo-user-id",
+          email: "demo@example.com",
+          name: "Demo User"
+        };
       }
     })
   ],
