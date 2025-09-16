@@ -1,0 +1,117 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  buyers    Buyer[]
+  histories BuyerHistory[]
+}
+
+model Buyer {
+  id           String       @id @default(uuid())
+  fullName     String
+  email        String?      @unique
+  phone        String       @unique
+  city         City
+  propertyType PropertyType
+  bhk          BHK?
+  purpose      Purpose
+  budgetMin    Int?
+  budgetMax    Int?
+  timeline     Timeline
+  source       Source
+  status       Status       @default(NEW)
+  notes        String?
+  tags         String       @default("")
+  ownerId      String
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  
+  owner        User         @relation(fields: [ownerId], references: [id])
+  histories    BuyerHistory[]
+  
+  @@index([status])
+  @@index([city])
+  @@index([propertyType])
+  @@index([timeline])
+  @@index([ownerId])
+}
+
+model BuyerHistory {
+  id        String   @id @default(uuid())
+  buyerId   String
+  changedBy String
+  changedAt DateTime @default(now())
+  diff      String
+  
+  buyer     Buyer    @relation(fields: [buyerId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [changedBy], references: [id])
+  
+  @@index([buyerId])
+}
+
+enum City {
+  CHANDIGARH
+  MOHALI
+  ZIRAKPUR
+  PANCHKULA
+  OTHER
+}
+
+enum PropertyType {
+  APARTMENT
+  VILLA
+  PLOT
+  OFFICE
+  RETAIL
+}
+
+enum BHK {
+  BHK1
+  BHK2
+  BHK3
+  BHK4
+  STUDIO
+}
+
+enum Purpose {
+  BUY
+  RENT
+}
+
+enum Timeline {
+  IMMEDIATE
+  MONTHS_3
+  MONTHS_6
+  EXPLORING
+}
+
+enum Source {
+  WEBSITE
+  REFERRAL
+  WALK_IN
+  CALL
+  OTHER
+}
+
+enum Status {
+  NEW
+  QUALIFIED
+  CONTACTED
+  VISITED
+  NEGOTIATION
+  CONVERTED
+  DROPPED
+}
